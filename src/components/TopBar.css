@@ -1,0 +1,33 @@
+.top {
+  display: flex;
+  align-items: center; 
+}
+
+.profile {
+  display: flex;
+  margin-top: 30px;
+  margin-left: 400px;
+  align-items: center;
+  gap: 12px; /* space between name and circle */
+}
+
+.profile h4 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  color: #0a7a3a; /* green text */
+}
+
+.profile .avatar {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 2px solid #000;
+  border-radius: 50%;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1;               /* prevents extra height */
+  background: #fff;
+  color: #000;
+}

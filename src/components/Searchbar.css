@@ -1,0 +1,50 @@
+.searchbar {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  margin-left: 50px;
+}
+
+.searchbar form {
+  display: flex;
+  align-items: center;
+  background: #f2f2f2;         /* light gray background */
+  border: 2px solid #777;      /* subtle gray border */
+  border-radius: 999px;        /* pill shape */
+  padding: 4px 14px;
+  width: 400px;
+  max-width: none;            /* optional: match your screenshot */
+}
+
+.searchbar input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 14px;
+  padding: 8px 10px;
+  font-family: inherit;
+  color: #111;
+}
+
+.searchbar input::placeholder {
+  color: #555;
+}
+
+.searchbar button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 0;
+  margin-right: 10px;          /* spacing between icon and input */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.searchbar .search-icon {
+  width: 20px;
+  height: 20px;
+  opacity: 0.8;
+}
