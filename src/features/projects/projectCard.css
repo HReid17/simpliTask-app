@@ -1,0 +1,191 @@
+/* Card Shell */
+.card-wrapper {
+  background: #fff;
+  border-radius: 1rem;
+  padding: 1.75rem;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+  margin-top: 40px;
+}
+
+/* Header */
+.header {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+}
+
+.header .name {
+  margin-left: 6rem;
+  letter-spacing: 1px;
+}
+
+.header .meta {
+  display: flex;
+  gap: 8rem;
+  color: #6b7280;
+  font-size: 0.95rem;
+  margin-left: auto; 
+  padding-right: 6rem; 
+}
+
+.tasks {
+  margin-top: 2.5rem;
+}
+
+/* 3-Column Layout */
+.task-columns,
+.task-row,
+.add-task-inline {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr; /* Task | Due | Progress */
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+}
+
+/* Header row */
+.task-columns {
+  font-weight: 600;
+  color: #4b5563;
+  border-bottom: 2px solid #e5e7eb;
+  padding-bottom: 0.4rem;
+  margin-bottom: 0.75rem;
+  font-size: 0.95rem;
+}
+
+/* Task list rows */
+.task-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.task-row {
+  padding: 12px 0;
+  border-bottom: 1px solid #eee;
+  font-size: 0.95rem;
+}
+.task-row:last-child {
+  border-bottom: none;
+}
+
+/* Task cells */
+.task-name {
+  font-weight: 400;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.task-due {
+  color: #6b7280;
+  text-align: left; 
+  padding-left: 4px;
+}
+.task-progress {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
+  white-space: nowrap;
+}
+
+.muted {
+  color: #6b7280;
+}
+
+/* Edit Mode Inputs */
+.task-row input[type="text"],
+.task-row input[type="date"],
+.task-row input[type="number"] {
+  padding: 0.35rem 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font: inherit;
+  font-size: 0.85rem; 
+}
+.task-row .save-btn {
+  background: #10b981;
+  color: #fff;
+  border: none;
+  padding: 0.35rem 0.65rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+.task-row .save-btn:hover {
+  background: #059669;
+}
+
+.task-progress .link-btn,
+.task-progress .delete-btn {
+  margin-left: 4px;
+}
+
+/* Add Task Form */
+.add-task-inline {
+  margin-top: 2rem;
+  font-size: 0.9rem;
+}
+.add-task-inline input {
+  padding: 0.45rem 0.55rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font: inherit;
+  font-size: 0.85rem;
+}
+.add-task-inline .save-btn {
+  justify-self: end;
+  background: #111827;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 0.55rem 1rem;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+.add-task-inline .save-btn:hover {
+  background: #0b1220;
+}
+
+/* Links & Buttons */
+.link-btn {
+  background: none;
+  border: none;
+  color: #047857;
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 0;
+  font: inherit;
+  font-size: 0.9rem;
+}
+.delete-btn {
+  background: none;
+  border: none;
+  color: #dc2626;
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 0;
+  font: inherit;
+  font-size: 0.9rem;
+}
+
+/* Responsive */
+@media (max-width: 720px) {
+  .task-columns {
+    display: none;
+  }
+  .task-row,
+  .add-task-inline {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .task-due {
+    text-align: left;
+    padding-left: 0;
+  }
+  .task-progress {
+    justify-self: start;
+  }
+}
+

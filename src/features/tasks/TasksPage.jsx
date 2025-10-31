@@ -9,6 +9,7 @@ import "./tasksPage.css"
 export default function TasksPage() {
     const dispatch = useDispatch();
     const tasks = useSelector((state) => state.tasks.tasks)
+    const projects = useSelector((state) => state.projects.projects)
 
     const [name, setName] = useState("");
     const [date, setDate] = useState("");
@@ -21,6 +22,7 @@ export default function TasksPage() {
     const [isEditing, setIsEditing] = useState({ id: null, field: null })
     const [editValue, setEditValue] = useState("")
 
+    const [activeEditRow, setActiveEditRow] = useState(null)
     const [showForm, setShowForm] = useState(false)
 
     useEffect(() => {
@@ -49,6 +51,7 @@ export default function TasksPage() {
         setShowForm(false);
     }
 
+
     const handleSortByName = () => {
         const newOrder = sortOrder === "asc" ? "desc" : "asc";
         setSortOrder(newOrder);
@@ -60,6 +63,7 @@ export default function TasksPage() {
 
         setDisplayedTasks(sorted);
     };
+
 
     const handleSortByDate = () => {
         const newOrder = sortOrder === "asc" ? "desc" : "asc";
@@ -76,6 +80,24 @@ export default function TasksPage() {
 
         setDisplayedTasks(sorted)
     }
+
+
+    const handleByProject = () => {
+        const newOrder = sortOrder === "asc" ? "desc" : "asc";
+        setSortOrder(newOrder);
+
+        const sorted = [...tasks].sort((a, b) => {
+            const projectA = projects.find(p => p.id === a.project)?.name || "";
+            const projectB = projects.find(p => p.id === b.project)?.name || "";
+
+            if (newOrder === "asc") return projectA.localeCompare(projectB);
+            else return projectB.localeCompare(projectA);
+        });
+
+        setDisplayedTasks(sorted);
+    };
+
+
 
     const handleSortByProgress = () => {
         const newOrder = sortOrder === "asc" ? "desc" : "asc";
@@ -134,12 +156,12 @@ export default function TasksPage() {
                     value={date}
                     onChange={(e) => setDate(e.target.value)}
                 />
-                <input
-                    type="text"
-                    placeholder="Project"
-                    value={project}
-                    onChange={(e) => setProject(e.target.value)}
-                />
+                <select value={project} onChange={(e) => setProject(e.target.value)}>
+                    <option value="">Select a Project...</option>
+                    {projects.map(p => (
+                        <option key={p.id} value={p.id}>{p.name}</option>
+                    ))}
+                </select>
                 <input
                     type="number"
                     placeholder="Progress"
@@ -156,8 +178,9 @@ export default function TasksPage() {
                         <tr>
                             <th>Task Name <button className="sortIcon-btn" onClick={handleSortByName}><img src={sortIcon} alt="sort-icon" className="sortIcon" /></button></th>
                             <th>Task Date <button className="sortingIcon-btn" onClick={handleSortByDate}><img src={sortingIcon} alt="sorting-icon" className="sortingIcon" /></button></th>
-                            <th>Project <button className="sortIcon-btn"><img src={sortIcon} alt="sort-icon" className="sortIcon" /></button></th>
+                            <th>Project <button className="sortIcon-btn" onClick={handleByProject}><img src={sortIcon} alt="sort-icon" className="sortIcon" /></button></th>
                             <th>Progress <button className="sortingIcon-btn" onClick={handleSortByProgress}><img src={sortingIcon} alt="sorting-icon" className="sortingIcon" /></button></th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -184,12 +207,15 @@ export default function TasksPage() {
                                         ) : (
                                             <>
                                                 {task.name}
-                                                <button
-                                                    className="edit-btn"
-                                                    onClick={() => handleEdit(task.id, "name", task.name)}
-                                                >
-                                                    <img src={pencil} alt="pencil-icon" />
-                                                </button>
+                                                {activeEditRow === task.id && (
+                                                    <button
+                                                        className="edit-btn"
+                                                        type="button"                              // important
+                                                        onClick={() => handleEdit(task.id, "name", task.name)}
+                                                    >
+                                                        <img src={pencil} alt="edit" />
+                                                    </button>
+                                                )}
                                             </>
                                         )}
                                     </td>
@@ -199,7 +225,7 @@ export default function TasksPage() {
                                         {isEditing?.id === task.id && isEditing.field === "date" ? (
                                             <input
                                                 type="date"
-                                                value={editValue || ""}
+                                                value={editValue || ""}                      // ensure controlled
                                                 onChange={(e) => setEditValue(e.target.value)}
                                                 onBlur={() => handleSaveEdit(task.id)}
                                                 onKeyDown={(e) => handleKeyDown(e, task.id)}
@@ -208,47 +234,59 @@ export default function TasksPage() {
                                         ) : (
                                             <>
                                                 {task.date || "-"}
-                                                <button
-                                                    className="edit-btn"
-                                                    onClick={() => handleEdit(task.id, "date", task.date || "")}
-                                                >
-                                                    <img src={pencil} alt="pencil-icon" />
-                                                </button>
+                                                {activeEditRow === task.id && (
+                                                    <button
+                                                        className="edit-btn"
+                                                        type="button"
+                                                        onClick={() => handleEdit(task.id, "date", task.date || "")}
+                                                    >
+                                                        <img src={pencil} alt="edit" />
+                                                    </button>
+                                                )}
                                             </>
                                         )}
                                     </td>
 
+
                                     {/* PROJECT */}
                                     <td>
                                         {isEditing?.id === task.id && isEditing.field === "project" ? (
-                                            <input
-                                                type="text"
-                                                value={editValue}
+                                            <select
+                                                value={editValue}                            // editing value
                                                 onChange={(e) => setEditValue(e.target.value)}
                                                 onBlur={() => handleSaveEdit(task.id)}
-                                                onKeyDown={(e) => handleKeyDown(e, task.id)}
                                                 autoFocus
-                                            />
+                                            >
+                                                <option value="">Unassigned</option>
+                                                {projects.map(p => (
+                                                    <option key={p.id} value={p.id}>{p.name}</option>
+                                                ))}
+                                            </select>
                                         ) : (
                                             <>
-                                                {task.project || "-"}
-                                                <button
-                                                    className="edit-btn"
-                                                    onClick={() =>
-                                                        handleEdit(task.id, "project", task.project || "")
-                                                    }
-                                                >
-                                                    <img src={pencil} alt="pencil-icon" />
-                                                </button>
+                                                {projects.find(p => p.id === task.project)?.name || "-"}
+                                                {activeEditRow === task.id && (
+                                                    <button
+                                                        className="edit-btn"
+                                                        type="button"
+                                                        onClick={() => handleEdit(task.id, "project", task.project || "")}
+                                                    >
+                                                        <img src={pencil} alt="edit" />
+                                                    </button>
+                                                )}
                                             </>
                                         )}
                                     </td>
+
+
 
                                     {/* PROGRESS */}
                                     <td>
                                         {isEditing?.id === task.id && isEditing.field === "progress" ? (
                                             <input
                                                 type="number"
+                                                min={0}
+                                                max={100}
                                                 value={editValue}
                                                 onChange={(e) => setEditValue(e.target.value)}
                                                 onBlur={() => handleSaveEdit(task.id)}
@@ -258,27 +296,38 @@ export default function TasksPage() {
                                         ) : (
                                             <>
                                                 {task.progress}%
-                                                <button
-                                                    className="edit-btn"
-                                                    onClick={() =>
-                                                        handleEdit(task.id, "progress", String(task.progress))
-                                                    }
-                                                >
-                                                    <img src={pencil} alt="pencil-icon" />
+                                                {activeEditRow === task.id && (
+                                                    <button
+                                                        className="edit-btn"
+                                                        type="button"
+                                                        onClick={() => handleEdit(task.id, "progress", String(task.progress))}
+                                                    >
+                                                        <img src={pencil} alt="edit" />
+                                                    </button>
+                                                )}
+                                            </>
+                                        )}
+                                    </td>
+
+
+                                    {/* ACTIONS */}
+                                    <td className="actions">
+                                        {activeEditRow === task.id ? (
+                                            <button className="link-btn" type="button" onClick={() => setActiveEditRow(null)}>
+                                                Close
+                                            </button>
+                                        ) : (
+                                            <>
+                                                <button className="link-btn" type="button" onClick={() => setActiveEditRow(task.id)}>
+                                                    Edit
+                                                </button>
+                                                <button className="delete-btn" type="button" onClick={() => dispatch(removeTask(task.id))}>
+                                                    Delete
                                                 </button>
                                             </>
                                         )}
                                     </td>
 
-                                    {/* DELETE */}
-                                    <td>
-                                        <button
-                                            className="delete-btn"
-                                            onClick={() => dispatch(removeTask(task.id))}
-                                        >
-                                            Delete
-                                        </button>
-                                    </td>
                                 </tr>
                             ))
                         )}
@@ -286,7 +335,6 @@ export default function TasksPage() {
 
                 </table>
             </div>
-
         </div>
     )
 }

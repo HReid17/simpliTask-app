@@ -7,7 +7,11 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin: 8px 0 16px;
+    margin: 60px 0 18px;
+}
+
+.page-header > h1 {
+    font-size: 50px;
 }
 
 .link-btn {
@@ -170,6 +174,11 @@
     transform: scale(1.05);
     transition: all 0.1s ease;
 }
+
+.actions .link-btn {
+  margin-right: 12px;
+}
+
 
 /* responsive */
 @media (max-width: 720px) {
