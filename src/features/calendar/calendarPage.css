@@ -1,0 +1,62 @@
+.fc .task-pill {
+    /* FullCalendar's default blue-ish */
+    color: #fff;
+    border-radius: 6px;
+    padding: 4px 6px;
+    font-size: 12px;
+    line-height: 1.2;
+    overflow: hidden;
+    transition: max-height 180ms ease, padding 180ms ease;
+    max-height: 22px;
+    /* compact height */
+    cursor: pointer;
+}
+
+/* Title (always visible) */
+.fc .task-pill .title {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+/* Expanded state */
+.fc .task-pill.open {
+    max-height: 300px;
+    /* expand within the cell */
+    padding: 6px 8px;
+    white-space: normal;
+}
+
+.fc .task-pill .details {
+    margin-top: 6px;
+    font-size: 11px;
+}
+
+.fc .task-pill .desc {
+    margin: 0 0 6px 0;
+}
+
+.fc .task-pill .meta {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px 10px;
+}
+
+.fc .task-pill .meta dt {
+    opacity: 0.85;
+}
+
+.fc .task-pill .meta dd {
+    margin: 0;
+    font-weight: 600;
+}
+
+/* Let the event's inner container show our growth */
+.fc-daygrid-event-harness,
+.fc-daygrid-event {
+    overflow: visible;
+}
+
+.fc-daygrid-event .fc-event-main {
+    overflow: visible;
+}
