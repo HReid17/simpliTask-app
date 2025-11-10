@@ -30,13 +30,13 @@
   }
 }
 
-/* ===== Card Styling (shared look for dashboard cards) ===== */
+/* Card Styling (shared look for dashboard cards) */
 
 .dashboard-wrapper .tasks-card,
 .dashboard-wrapper .projects-card,
 .dashboard-wrapper .calendar-card {
   background-color: white;
-  border: 1px solid #e5e7eb;  /* light gray border */
+  border: 1px solid #e5e7eb;  
   border-radius: 12px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
   padding: 1.5rem;
@@ -50,7 +50,7 @@
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
 }
 
-/* ===== Shared Heading and Button Styles ===== */
+/* Shared Heading and Button Styles */
 
 .dashboard-wrapper h2 {
   font-size: 1.25rem;
@@ -62,17 +62,17 @@
 .dashboard-wrapper button {
   background: none;
   border: none;
-  color: #2563eb; /* blue-600 */
+  color: #2563eb; 
   cursor: pointer;
   font-weight: 500;
   transition: color 0.2s ease;
 }
 
 .dashboard-wrapper button:hover {
-  color: #1d4ed8; /* blue-700 */
+  color: #1d4ed8;
 }
 
-/* ===== Project & Task list styles ===== */
+/* Project & Task list styles */
 
 .projects-list ul,
 .tasks-list ul {
@@ -128,7 +128,7 @@
   align-items: center;
 }
 
-/* ===== Responsive tweaks ===== */
+/* Responsive tweaks */
 
 @media (max-width: 500px) {
   .dashboard-wrapper {

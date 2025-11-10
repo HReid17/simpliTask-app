@@ -60,7 +60,7 @@ export default function DashboardCalendar() {
                 showNonCurrentDates={false}
                 events={events}
                 eventDisplay="block"
-                dayMaxEventRows={2}       // "+n more" if crowded
+                dayMaxEventRows={2}     
                 dateClick={() => nav("/calendar")}
                 eventClick={() => nav("/calendar")}
             />

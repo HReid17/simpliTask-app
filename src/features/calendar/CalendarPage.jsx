@@ -14,7 +14,7 @@ interactionPlugin: enables clicks and other interactions. */
 
 export default function CalendarPage() {
 
-  const tasks = useSelector((state) => state.tasks.tasks);    //Pull the current task list from Redux store
+  const tasks = useSelector((state) => state.tasks.tasks);    // Pull the current task list from Redux store
   const [selectedEventId, setSelectedEventId] = useState(null); // Tracks which event (if any) is expanded in-place
 
   const statusFromProgress = (p = 0) =>
@@ -109,7 +109,7 @@ export default function CalendarPage() {
         // Custom rendering logic for each event (title + details)
         eventContent={renderEventContent}
 
-        eventDisplay="block"         // Block so it can grow
+        eventDisplay="block"       // Block so it can grow
         dayMaxEventRows={2}      // prevent FC from collapsing extra content
 
       />

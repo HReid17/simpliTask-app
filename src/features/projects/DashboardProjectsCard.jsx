@@ -11,7 +11,7 @@ export default function DashboardProjectsCard() {
         const v = s.toLowerCase();
         if (v.includes("complete")) return "bg-green-100 text-green-700";
         if (v.includes("progress") || v.includes("ongoing")) return "bg-amber-100 text-amber-700";
-        if (v.includes("not")) return "bg-red-100 text-red-700"; // "Not Started"
+        if (v.includes("not")) return "bg-red-100 text-red-700"; 
         return "bg-gray-100 text-gray-700";
     };
 

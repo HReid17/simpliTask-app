@@ -16,19 +16,19 @@ export default function Searchbar() {
         if (!query) return [];
         return tasks
             .filter(t => t.name?.toLowerCase().includes(query))
-            .slice(0, 8); // cap the list
+            .slice(0, 8); 
     }, [q, tasks]);
 
     const handleSelect = (taskId) => {
         nav(`/tasks?editId=${taskId}&field=name`);
         setQ("");
-        document.activeElement.blur(); // removes focus from the input
+        document.activeElement.blur(); 
     };
 
     useEffect(() => {
         const handleClickOutside = (e) => {
             if (searchRef.current && !searchRef.current.contains(e.target)) {
-                setQ(""); // clear search (hides results)
+                setQ(""); // clear search 
             }
         };
 

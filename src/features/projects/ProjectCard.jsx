@@ -44,7 +44,7 @@ export default function ProjectCard() {
         setProgress(0);
     };
 
-    // ✅ Edit mode state
+    // Edit mode state
     const [editingTaskId, setEditingTaskId] = useState(null);
     const [draft, setDraft] = useState({ name: "", date: "", progress: 0 });
 
