@@ -1,13 +1,70 @@
 .task-wrapper {
     max-width: 980px;
     margin: 0 auto;
+    /* optional: let the table area use available height if the page is tall */
+    min-height: 0;
 }
+
+/* ===== Scrollable container around the table ===== */
+.task-table {
+    margin-top: 40px;            /* moved off the table element */
+    max-height: 60vh;            /* adjust to taste, or swap for a fixed px height */
+    overflow: auto;              /* vertical + horizontal scroll if needed */
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* table */
+.task-table table {
+    /* margin-top removed so sticky header sits at top of the scrollbox */
+    width: 100%;
+    /* sticky headers work more reliably with separate borders */
+    border-collapse: separate;
+    border-spacing: 0;
+    min-width: 720px;            /* allow horizontal scroll on small screens */
+}
+
+/* Sticky header: stays visible while body scrolls */
+.task-table thead th {
+    text-align: left;
+    padding: 14px 14px;
+    border-bottom: 2px solid #111;
+    font-weight: 700;
+    font-size: 20px;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background: #fff;            /* ensure text isn’t overlaid by rows */
+}
+
+/* body cells unchanged except for optional nowrap to keep rows compact */
+.task-table tbody td {
+    padding: 12px 14px;
+    border-bottom: 1px solid #e5e7eb;
+    white-space: nowrap;         /* remove if you prefer wrapping */
+}
+
+.task-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Empty state row */
+.task-table td[colspan] {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    padding: 24px;
+    color: #374151;
+}
+
+/* ——— your existing styles unchanged below ——— */
 
 .page-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin: 60px 0 18px;
+    margin: 30px 0 18px;
 }
 
 .page-header > h1 {
@@ -32,12 +89,12 @@
 .add-task-form {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 10px;
     background: #fff;
     border: 1px solid #d1d5db;
     border-radius: 10px;
-    padding: 10px;
-    margin-bottom: 14px;
+    padding: 12px;
+    margin-bottom: 18px;
 }
 
 .add-task-form input,
@@ -70,38 +127,6 @@
     border: 2px solid #111;
     border-radius: 14px;
     padding: 6px;
-}
-
-/* table */
-.task-table table {
-    margin-top: 40px;
-    width: 100%;
-    border-collapse: collapse;
-}
-
-.task-table thead th {
-    text-align: left;
-    padding: 12px 14px;
-    border-bottom: 2px solid #111;
-    font-weight: 700;
-    font-size: 20px;
-}
-
-.task-table tbody td {
-    padding: 12px 14px;
-    border-bottom: 1px solid #e5e7eb;
-}
-
-.task-table tbody tr:last-child td {
-    border-bottom: none;
-}
-
-.task-table td[colspan] {
-    display: flex;
-    align-items: center;
-    text-align: center;
-    padding: 24px;
-    color: #374151;
 }
 
 .delete-btn {
@@ -179,7 +204,6 @@
   margin-right: 12px;
 }
 
-
 /* responsive */
 @media (max-width: 720px) {
     .page-header h1 {
@@ -192,5 +216,10 @@
 
     .add-task-form {
         gap: 6px;
+    }
+
+    /* Smaller scrollbox on short mobile viewports */
+    .task-table {
+        max-height: 50vh;
     }
 }

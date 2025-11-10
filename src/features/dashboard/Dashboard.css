@@ -1,3 +1,142 @@
-.dashboard {
-    display: flex;
+/* ===== Dashboard Layout ===== */
+
+.dashboard-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;              /* space between upper and lower sections */
+  padding: 2rem;
+  margin-top: -1.5rem;
+  margin-left: 2.2rem;
+  max-height: 100vh;
+}
+
+/* Top section (tasks) */
+.upper {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Bottom section (projects + calendar) */
+.lower {
+  display: grid;
+  grid-template-columns: 1fr;  /* single column on mobile */
+  gap: 2rem;
+}
+
+/* Side-by-side on wider screens */
+@media (min-width: 768px) {
+  .lower {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* ===== Card Styling (shared look for dashboard cards) ===== */
+
+.dashboard-wrapper .tasks-card,
+.dashboard-wrapper .projects-card,
+.dashboard-wrapper .calendar-card {
+  background-color: white;
+  border: 1px solid #e5e7eb;  /* light gray border */
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  padding: 1.5rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.dashboard-wrapper .tasks-card:hover,
+.dashboard-wrapper .projects-card:hover,
+.dashboard-wrapper .calendar-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+/* ===== Shared Heading and Button Styles ===== */
+
+.dashboard-wrapper h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #111827;
+}
+
+.dashboard-wrapper button {
+  background: none;
+  border: none;
+  color: #2563eb; /* blue-600 */
+  cursor: pointer;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.dashboard-wrapper button:hover {
+  color: #1d4ed8; /* blue-700 */
+}
+
+/* ===== Project & Task list styles ===== */
+
+.projects-list ul,
+.tasks-list ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.projects-list li,
+.tasks-list li {
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #e5e7eb;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.projects-list li:hover,
+.tasks-list li:hover {
+  background-color: #f9fafb;
+}
+
+/* Project details layout */
+.projects-list .details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.projects-list .name {
+  font-weight: 500;
+  color: #111827;
+}
+
+.projects-list .count {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.projects-list .completion {
+  font-size: 0.75rem;
+  color: #9ca3af;
+}
+
+/* ===== Calendar container ===== */
+
+.calendar-card {
+  overflow: hidden;
+}
+
+.calendar-card h2 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* ===== Responsive tweaks ===== */
+
+@media (max-width: 500px) {
+  .dashboard-wrapper {
+    padding: 1rem;
+    gap: 1.5rem;
+  }
+
+  .dashboard-wrapper h2 {
+    font-size: 1.1rem;
+  }
 }

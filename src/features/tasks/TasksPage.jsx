@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
+import { useSearchParams } from "react-router-dom";
 import { addTask, removeTask, editTask } from "./tasksSlice"
 import sortIcon from "../../assets/sort.png"
 import sortingIcon from "../../assets/sorting.png"
@@ -10,6 +11,7 @@ export default function TasksPage() {
     const dispatch = useDispatch();
     const tasks = useSelector((state) => state.tasks.tasks)
     const projects = useSelector((state) => state.projects.projects)
+    const [searchParams] = useSearchParams();
 
     const [name, setName] = useState("");
     const [date, setDate] = useState("");
@@ -98,7 +100,6 @@ export default function TasksPage() {
     };
 
 
-
     const handleSortByProgress = () => {
         const newOrder = sortOrder === "asc" ? "desc" : "asc";
         setSortOrder(newOrder);
@@ -129,6 +130,41 @@ export default function TasksPage() {
             setEditValue("");
         }
     };
+
+    const findTaskById = (id) => {
+        return tasks.find(t => String(t.id) === String(id));
+    };
+
+    useEffect(() => {
+        const editId = searchParams.get("editId");
+        const field = searchParams.get("field") || "name";
+        if (!editId || tasks.length === 0) return;
+
+        const task = findTaskById(editId);
+        if (!task) return;
+
+        // Make sure the table shows the latest ordering that includes the task.
+        // (You already mirror tasks -> displayedTasks)
+        setDisplayedTasks((prev) => {
+            // If your sorting might hide/move it, you can just re-apply default order here:
+            return tasks;
+        });
+
+        // Open the row and specific inline editor
+        setActiveEditRow(task.id);
+        // set edit mode for that field using your existing function
+        const currentValue = task[field];
+        setIsEditing({ id: task.id, field });
+        setEditValue(currentValue ?? "");
+
+        // Scroll that row into view after DOM paints
+        requestAnimationFrame(() => {
+            const row = document.querySelector(`tr[data-task-id="${task.id}"]`);
+            if (row) {
+                row.scrollIntoView({ behavior: "smooth", block: "center" });
+            }
+        });
+    }, [searchParams, tasks]); // re-run if tasks load/refresh
 
     return (
         <div className="task-wrapper">
@@ -192,7 +228,7 @@ export default function TasksPage() {
                             </tr>
                         ) : (
                             displayedTasks.map((task) => (
-                                <tr key={task.id}>
+                                <tr key={task.id} data-task-id={task.id}>
                                     {/* NAME */}
                                     <td>
                                         {isEditing?.id === task.id && isEditing.field === "name" ? (
@@ -210,7 +246,7 @@ export default function TasksPage() {
                                                 {activeEditRow === task.id && (
                                                     <button
                                                         className="edit-btn"
-                                                        type="button"                              // important
+                                                        type="button"
                                                         onClick={() => handleEdit(task.id, "name", task.name)}
                                                     >
                                                         <img src={pencil} alt="edit" />
@@ -225,7 +261,7 @@ export default function TasksPage() {
                                         {isEditing?.id === task.id && isEditing.field === "date" ? (
                                             <input
                                                 type="date"
-                                                value={editValue || ""}                      // ensure controlled
+                                                value={editValue || ""}
                                                 onChange={(e) => setEditValue(e.target.value)}
                                                 onBlur={() => handleSaveEdit(task.id)}
                                                 onKeyDown={(e) => handleKeyDown(e, task.id)}
@@ -252,7 +288,7 @@ export default function TasksPage() {
                                     <td>
                                         {isEditing?.id === task.id && isEditing.field === "project" ? (
                                             <select
-                                                value={editValue}                            // editing value
+                                                value={editValue}
                                                 onChange={(e) => setEditValue(e.target.value)}
                                                 onBlur={() => handleSaveEdit(task.id)}
                                                 autoFocus

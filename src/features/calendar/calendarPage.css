@@ -1,5 +1,4 @@
 .fc .task-pill {
-    /* FullCalendar's default blue-ish */
     color: #fff;
     border-radius: 6px;
     padding: 4px 6px;
@@ -8,7 +7,6 @@
     overflow: hidden;
     transition: max-height 180ms ease, padding 180ms ease;
     max-height: 22px;
-    /* compact height */
     cursor: pointer;
 }
 
@@ -60,3 +58,12 @@
 .fc-daygrid-event .fc-event-main {
     overflow: visible;
 }
+
+.fc .fc-button {
+    font-size: 12px;
+    padding: 2px 6px;
+    height: 26px;
+    line-height: 1.2;
+    border-radius: 6px;
+}
+

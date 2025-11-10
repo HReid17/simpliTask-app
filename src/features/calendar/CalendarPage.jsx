@@ -6,9 +6,11 @@ import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import "./calendarPage.css"
 
-/* Plugins - dayGridPlugin → month view.
-timeGridPlugin → week/day time columns (for the other buttons).
-interactionPlugin → enables clicks and other interactions. */
+/* Plugins - 
+
+dayGridPlugi: month view.
+timeGridPlugin: week/day time columns (for the other buttons).
+interactionPlugin: enables clicks and other interactions. */
 
 export default function CalendarPage() {
 
@@ -87,7 +89,7 @@ export default function CalendarPage() {
   };
 
   return (
-    <div>
+    <div className="calendar-card">
       <FullCalendar
         plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
         initialView="dayGridMonth"
@@ -108,7 +110,7 @@ export default function CalendarPage() {
         eventContent={renderEventContent}
 
         eventDisplay="block"         // Block so it can grow
-        dayMaxEventRows={false}      // prevent FC from collapsing extra content
+        dayMaxEventRows={2}      // prevent FC from collapsing extra content
 
       />
     </div>

@@ -1,0 +1,79 @@
+/* ===== Scrollable Tasks List ===== */
+
+.tasks-card .tasks-list {   /* ~3 items tall — adjust if needed */
+  max-height: 9rem;
+  overflow-y: auto;        /* enables scrolling if more tasks exist */
+  padding-right: 0.5rem;   /* prevents text being hidden under scrollbar */
+  margin: 0;
+  list-style: none;
+}
+
+.top-line {
+  display: flex;
+  justify-content: flex-start;
+  gap: 1rem;
+}
+
+.view-btn {
+  margin-bottom: 10px;
+  margin-left: auto;
+}
+
+/* Tweak the inner task styling for readability */
+.tasks-card .tasks-list li {
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #e5e7eb;  /* light divider line */
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  display: flex;
+}
+
+.tasks-card .tasks-list li:hover {
+  background-color: #f9fafb;  /* light hover effect */
+}
+
+/* Subtext layout inside each task */
+.details {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .5rem; /* optional */
+  width: 90%;
+}
+
+.details .name {
+  flex: 1;                 /* takes the remaining space */
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.details .date {
+  width: 140px;            /* keeps dates aligned */
+  text-align: right;
+  color: #4b5563;
+}
+
+.details .progress {
+  width: 80px;             /* keeps statuses aligned */
+  text-align: right;
+  color: #6b7280;
+}
+
+
+/* ===== Optional: Custom scrollbar (modern look) ===== */
+
+.tasks-card .tasks-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.tasks-card .tasks-list::-webkit-scrollbar-thumb {
+  background-color: #d1d5db; /* gray-300 */
+  border-radius: 3px;
+}
+
+.tasks-card .tasks-list::-webkit-scrollbar-thumb:hover {
+  background-color: #9ca3af; /* gray-400 */
+}
+
