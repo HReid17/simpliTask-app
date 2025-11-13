@@ -215,7 +215,7 @@ it("sorts by project name descending on first click, then ascending on second", 
 });
 
 
-// Test 5: Inline edit via Actions → click Edit, then pencil on cell, change & blur saves
+// Test 5: Inline edit via Actions - click Edit, then pencil on cell, change & blur saves
 
 it("enters inline edit for a cell, saves on blur, and updates the table", async () => {
     const user = userEvent.setup();
@@ -244,7 +244,8 @@ it("enters inline edit for a cell, saves on blur, and updates the table", async 
 });
 
 
-//  Simpler alt to Task 6: open row via Actions, edit Progress, save on blur
+//  Task 6: open row via Actions, edit Progress, save on blur
+
 it("edits the Progress cell via Actions → pencil and saves on blur", async () => {
     const user = userEvent.setup();
     mockParams = new URLSearchParams(""); // no URL params
