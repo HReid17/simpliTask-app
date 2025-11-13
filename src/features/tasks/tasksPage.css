@@ -1,14 +1,13 @@
 .task-wrapper {
     max-width: 980px;
     margin: 0 auto;
-    /* optional: let the table area use available height if the page is tall */
     min-height: 0;
 }
 
-/* ===== Scrollable container around the table ===== */
+/* Scrollable container around the table */
 .task-table {
     margin-top: 40px;            /* moved off the table element */
-    max-height: 60vh;            /* adjust to taste, or swap for a fixed px height */
+    max-height: 60vh;            
     overflow: auto;              /* vertical + horizontal scroll if needed */
     border: 1px solid #d1d5db;
     border-radius: 10px;
@@ -17,9 +16,7 @@
 
 /* table */
 .task-table table {
-    /* margin-top removed so sticky header sits at top of the scrollbox */
     width: 100%;
-    /* sticky headers work more reliably with separate borders */
     border-collapse: separate;
     border-spacing: 0;
     min-width: 720px;            /* allow horizontal scroll on small screens */
@@ -35,14 +32,13 @@
     position: sticky;
     top: 0;
     z-index: 1;
-    background: #fff;            /* ensure text isn’t overlaid by rows */
+    background: #fff; 
 }
 
-/* body cells unchanged except for optional nowrap to keep rows compact */
 .task-table tbody td {
     padding: 12px 14px;
     border-bottom: 1px solid #e5e7eb;
-    white-space: nowrap;         /* remove if you prefer wrapping */
+    white-space: nowrap;         
 }
 
 .task-table tbody tr:last-child td {
@@ -58,7 +54,6 @@
     color: #374151;
 }
 
-/* ——— your existing styles unchanged below ——— */
 
 .page-header {
     display: flex;

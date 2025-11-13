@@ -143,16 +143,12 @@ export default function TasksPage() {
         const task = findTaskById(editId);
         if (!task) return;
 
-        // Make sure the table shows the latest ordering that includes the task.
-        // (You already mirror tasks -> displayedTasks)
         setDisplayedTasks((prev) => {
-            // If your sorting might hide/move it, you can just re-apply default order here:
             return tasks;
         });
 
-        // Open the row and specific inline editor
+
         setActiveEditRow(task.id);
-        // set edit mode for that field using your existing function
         const currentValue = task[field];
         setIsEditing({ id: task.id, field });
         setEditValue(currentValue ?? "");

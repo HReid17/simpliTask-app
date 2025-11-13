@@ -31,7 +31,7 @@ export default function DashboardCalendar() {
                     backgroundColor: bg,
                     borderColor: bg,
                     extendedProps: {
-                        task: t,                 // keep entire task here
+                        task: t,                 
                         status: statusFromProgress(t.progress),
                     },
                 };
@@ -53,8 +53,8 @@ export default function DashboardCalendar() {
                     twoWeek: { type: 'dayGrid', duration: { weeks: 2 } },
                 }}
                 firstDay={1}
-                headerToolbar={false}     // hide big toolbar in the widget
-                height="auto"             // keep it small
+                headerToolbar={false}
+                height="auto"             
                 fixedWeekCount={false}
                 showNonCurrentDates={false}
                 events={events}
