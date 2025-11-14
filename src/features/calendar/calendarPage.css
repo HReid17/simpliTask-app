@@ -1,3 +1,10 @@
+.calendar {
+    width: 100%;
+    margin-top: 30px;
+    margin-left: 20px;
+    height: 80vh;
+}
+
 .fc .task-pill {
     color: #fff;
     border-radius: 6px;
@@ -48,7 +55,6 @@
     font-weight: 600;
 }
 
-/* Let the event's inner container show our growth */
 .fc-daygrid-event-harness,
 .fc-daygrid-event {
     overflow: visible;
@@ -66,3 +72,29 @@
     border-radius: 6px;
 }
 
+
+/*  Responsive  */
+
+@media (max-width: 1024px) {
+    .calendar {
+        width: 100%;
+        height: 80vh;
+        margin: 24px auto;
+    }
+}
+
+@media (max-width: 720px) {
+    .calendar {
+        width: auto;
+        height: 76vh;
+    }
+
+    .fc .fc-toolbar-title {
+        font-size: 1rem;
+    }
+
+    .fc .fc-button {
+        padding: 3px 6px;
+        font-size: 0.7rem;
+    }
+}

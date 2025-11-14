@@ -1,13 +1,14 @@
-/* ===== Dashboard Layout ===== */
+/*  Dashboard Layout  */
 
 .dashboard-wrapper {
   display: flex;
   flex-direction: column;
-  gap: 2rem;              /* space between upper and lower sections */
+  gap: 2rem;
+  /* space between upper and lower sections */
   padding: 2rem;
   margin-top: -1.5rem;
   margin-left: 2.2rem;
-  max-height: 100vh;
+  height: auto;
 }
 
 /* Top section (tasks) */
@@ -19,24 +20,18 @@
 /* Bottom section (projects + calendar) */
 .lower {
   display: grid;
-  grid-template-columns: 1fr;  /* single column on mobile */
+  grid-template-columns: 1fr;
+  /* single column on mobile */
   gap: 2rem;
 }
 
-/* Side-by-side on wider screens */
-@media (min-width: 768px) {
-  .lower {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-/* Card Styling (shared look for dashboard cards) */
+/*  Card Styling */
 
 .dashboard-wrapper .tasks-card,
 .dashboard-wrapper .projects-card,
 .dashboard-wrapper .calendar-card {
   background-color: white;
-  border: 1px solid #e5e7eb;  
+  border: 1px solid #e5e7eb;
   border-radius: 12px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
   padding: 1.5rem;
@@ -50,7 +45,7 @@
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
 }
 
-/* Shared Heading and Button Styles */
+/*  Shared Heading and Button Styles  */
 
 .dashboard-wrapper h2 {
   font-size: 1.25rem;
@@ -62,7 +57,7 @@
 .dashboard-wrapper button {
   background: none;
   border: none;
-  color: #2563eb; 
+  color: #2563eb;
   cursor: pointer;
   font-weight: 500;
   transition: color 0.2s ease;
@@ -72,7 +67,7 @@
   color: #1d4ed8;
 }
 
-/* Project & Task list styles */
+/*  Project & Task list styles  */
 
 .projects-list ul,
 .tasks-list ul {
@@ -94,7 +89,7 @@
   background-color: #f9fafb;
 }
 
-/* Project details layout */
+/*  Project details layout  */
 .projects-list .details {
   display: flex;
   flex-direction: column;
@@ -116,7 +111,7 @@
   color: #9ca3af;
 }
 
-/* ===== Calendar container ===== */
+/*  Calendar container  */
 
 .calendar-card {
   overflow: hidden;
@@ -128,15 +123,39 @@
   align-items: center;
 }
 
+/* Make the projects card vertical so the list can grow inside */
+.dashboard-wrapper .projects-card,
+.dashboard-wrapper .calendar-card {
+  display: flex;
+  flex-direction: column;
+}
+
+
+/* Limit visible projects to 3, scroll for the rest */
+.dashboard-wrapper .projects-card .projects-list {
+  max-height: 270px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+
 /* Responsive tweaks */
 
 @media (max-width: 500px) {
   .dashboard-wrapper {
     padding: 1rem;
     gap: 1.5rem;
+    margin: 0;
   }
 
   .dashboard-wrapper h2 {
     font-size: 1.1rem;
+  }
+}
+
+/* Side-by-side on wider screens */
+@media (min-width: 768px) {
+  .lower {
+    grid-template-columns: 1fr 1fr;
   }
 }

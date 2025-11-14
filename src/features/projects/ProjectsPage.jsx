@@ -32,7 +32,7 @@ export default function ProjectsPage() {
     // Inline Edit
     const [editingId, setEditingId] = useState(null)
     const [draft, setDraft] = useState({ name: "", due: "", status: "in-progress" });
-    
+
     const resetAddForm = () => {
         setName(""),
             setDue(""),
@@ -83,7 +83,7 @@ export default function ProjectsPage() {
 
             {(showForm && (
                 <form className="project-card project-card--editing project-card--new" onSubmit={(e) => handleAdd(e)}>
-                    <div>
+                    <div data-label="Name">
                         <input
                             type="text"
                             placeholder="Project Name"
@@ -92,22 +92,24 @@ export default function ProjectsPage() {
                             required
                         />
                     </div>
-                    <div>
+                    <div data-label="Date">
                         <input type="date"
                             value={due}
                             onChange={(e) => setDue(e.target.value)} />
                     </div>
-                    <div className="project-card-status">
-                        <select value={status} onChange={(e) => setStatus(e.target.value)}>
-                            {STATUS_OPTIONS.map((o) => (
-                                <option key={o.value} value={o.value}>
-                                    {o.label}
-                                </option>
-                            ))}
-                        </select>
-                        <button className="save-btn" type="submit">
-                            Save
-                        </button>
+                    <div data-label="Status">
+                        <div className="project-card-status">
+                            <select value={status} onChange={(e) => setStatus(e.target.value)}>
+                                {STATUS_OPTIONS.map((o) => (
+                                    <option key={o.value} value={o.value}>
+                                        {o.label}
+                                    </option>
+                                ))}
+                            </select>
+                            <button className="save-btn" type="submit">
+                                Save
+                            </button>
+                        </div>
                     </div>
                 </form>
             ))
@@ -122,7 +124,7 @@ export default function ProjectsPage() {
 
                     return (
                         <div key={p.id} className={`project-card ${isEditing ? "project-card--editing" : ""}`}>
-                            <div>
+                            <div data-label="Name">
                                 {isEditing ? (
                                     <input
                                         autoFocus
@@ -137,7 +139,7 @@ export default function ProjectsPage() {
                                 )}
                             </div>
 
-                            <div>
+                            <div data-label="Scheduled Completion">
                                 {isEditing ? (
                                     <input
                                         type="date"
@@ -149,7 +151,8 @@ export default function ProjectsPage() {
                                 )}
                             </div>
 
-                            <div className={`project-card-status ${isEditing ? "project-card-status--edit" : ""}`}>
+                            <div className={`project-card-status ${isEditing ? "project-card-status--edit" : ""}`}
+                                data-label="Status">
                                 {isEditing ? (
                                     <>
                                         <select

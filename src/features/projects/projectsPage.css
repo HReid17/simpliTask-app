@@ -1,34 +1,35 @@
-:root{
-  --ink:#0f0f0f;
-  --muted:#666;
-  --border:#202020;
-  --panel:#fff;
-  --success:#0f904f;
-  --warn:#e0c300;
-  --error:#e21414;
-  --radius:14px;
-  --radius-pill:16px;
+:root {
+  --ink: #0f0f0f;
+  --muted: #666;
+  --border: #202020;
+  --panel: #fff;
+  --success: #0f904f;
+  --warn: #e0c300;
+  --error: #e21414;
+  --radius: 14px;
+  --radius-pill: 16px;
   --control-h: 44px;
 
   --project-cols: minmax(160px, 250px) minmax(250px, 0.8fr) minmax(220px, 1.1fr);
 }
 
-.projects-wrapper{
-  max-width: 960px;             
+.projects-wrapper {
+  max-width: 960px;
   margin: 38px auto;
   color: var(--ink);
-  font-size: 18px;             
+  font-size: 18px;
   line-height: 1.3;
 }
 
 /* header buttons */
-.header-buttons{
+.header-buttons {
   display: flex;
   align-items: center;
   gap: 24px;
   margin-left: 8px;
 }
-.link-btn{
+
+.link-btn {
   background: none;
   border: none;
   color: #137a34;
@@ -38,29 +39,33 @@
   padding: 6px 2px;
 }
 
-.link-btn:focus{ outline: 2px solid var(--ink); outline-offset: 2px; }
+.link-btn:focus {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
 
 /* Column header */
-.projects-columns{
+.projects-columns {
   display: grid;
   grid-template-columns: var(--project-cols);
   gap: 16px;
   padding: 16px 24px;
   border-top: 2px solid var(--ink);
   border-bottom: 2px solid var(--ink);
-  position: sticky;             
+  position: sticky;
   top: 0;
   z-index: 1;
   margin-top: 25px;
 }
-.projects-columns > div{
+
+.projects-columns>div {
   font-weight: 700;
   text-decoration: underline;
 }
 
-.projects-list{
-  display: grid;                
-  row-gap: 26px;               
+.projects-list {
+  display: grid;
+  row-gap: 26px;
   border-top: none;
   border-radius: 0 0 10px 10px;
   padding: 20px 16px 24px;
@@ -69,36 +74,44 @@
   padding-right: 12px;
 }
 
-.projects-list .project-card{ margin: 0; }
-.projects-list .project-card.project-card--editing{ margin: 0; }
+.projects-list .project-card {
+  margin: 0;
+}
 
-.projects-list .project-card:first-child{ margin-top: 0; }
+.projects-list .project-card.project-card--editing {
+  margin: 0;
+}
 
-.projects-list .empty{
+.projects-list .project-card:first-child {
+  margin-top: 0;
+}
+
+.projects-list .empty {
   color: var(--muted);
   padding: 24px;
 }
 
 /* Row cards */
-.project-card{
+.project-card {
   display: grid;
   grid-template-columns: var(--project-cols);
   gap: 14px;
-  align-items: center;               
+  align-items: center;
   padding: 20px 24px;
   margin: 18px 0px;
   border: 2px solid var(--ink);
   border-radius: var(--radius-pill);
-  font-size: 16px;                   
+  font-size: 16px;
 }
-.project-card > div{                 
+
+.project-card>div {
   display: flex;
   align-items: center;
   min-width: 0;
   min-height: 44px;
 }
 
-.project-card > div:first-child {
+.project-card>div:first-child {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -109,71 +122,81 @@
 }
 
 
-.project-card input[type="text"]{
-  max-width: 220px;        
-  width: 100%;             
+.project-card input[type="text"] {
+  max-width: 220px;
+  width: 100%;
   box-sizing: border-box;
-  justify-self: start;    
+  justify-self: start;
 }
 
-.projects-columns > div:nth-child(2),
-.project-card > div:nth-child(2){
+.projects-columns>div:nth-child(2),
+.project-card>div:nth-child(2) {
   justify-content: flex-start;
   text-align: left;
 }
 
-.project-card-status{
+.project-card-status {
   display: flex;
   align-items: center;
   gap: 12px;
-  justify-content: flex-start;      
-  min-width: 0;                      
+  justify-content: flex-start;
+  min-width: 0;
 }
-.project-card-status > span:first-child{
+
+.project-card-status>span:first-child {
   font-weight: 600;
-  white-space: nowrap;              
+  white-space: nowrap;
 }
 
 
 /* Actions */
-.row-actions{
+.row-actions {
   margin-left: auto;
   display: flex;
   align-items: center;
   gap: 12px;
 }
 
-.delete-btn{
+.delete-btn {
   background: none;
   padding: 8px 4px;
   cursor: pointer;
 }
 
 
-.status-dot{
-  width: 40px;                  
+.status-dot {
+  width: 40px;
   height: 40px;
   border-radius: 999px;
   border: 2px solid var(--ink);
   flex: 0 0 auto;
 }
-.status-dot-green{ background: var(--success); }
-.status-dot-yellow{ background: var(--warn); }
-.status-dot-red{ background: var(--error); }
+
+.status-dot-green {
+  background: var(--success);
+}
+
+.status-dot-yellow {
+  background: var(--warn);
+}
+
+.status-dot-red {
+  background: var(--error);
+}
 
 /* Inputs in edit rows */
 .project-card input[type="text"],
 .project-card input[type="date"],
-.project-card select{
+.project-card select {
   width: 100%;
   border: 2px solid var(--ink);
   border-radius: 10px;
   padding: 10px 12px;
-  font-size: 15px;                  
+  font-size: 15px;
   background: #fff;
 }
 
-.save-btn{
+.save-btn {
   border: 2px solid var(--ink);
   background: #fff;
   padding: 10px 14px;
@@ -184,7 +207,7 @@
 
 /* Add Form */
 
-.project-card.project-card--editing{
+.project-card.project-card--editing {
   grid-template-columns: var(--project-cols);
   align-items: center;
   background: transparent;
@@ -193,28 +216,28 @@
 }
 
 .project-card.project-card--editing.project-card--new {
-  margin-top: 24px;    
-  margin-bottom: 6px;  
+  margin-top: 24px;
+  margin-bottom: 6px;
 }
 
 
 .project-card--editing input[type="text"],
 .project-card--editing input[type="date"],
 .project-card--editing select,
-.project-card--editing .save-btn{
+.project-card--editing .save-btn {
   height: var(--control-h);
   line-height: var(--control-h);
   box-sizing: border-box;
 }
 
-.project-card-status--edit{
+.project-card-status--edit {
   display: flex;
   align-items: center;
   justify-content: flex-start;
   gap: 12px;
 }
 
-.project-card--editing .save-btn{
+.project-card--editing .save-btn {
   height: 44px;
   padding: 0 10px;
   border-radius: 2px;
@@ -231,12 +254,126 @@
 }
 
 .project-link:hover {
-   color: var(--accent, #2563eb);
+  color: var(--accent, #2563eb);
 }
 
 
-/* Responsive*/
-@media (max-width: 900px){
-  .projects-wrapper{ max-width: 100%; padding: 0 12px; }
-  .project-card, .projects-columns{ font-size: 15px; }
+/* Responsive */
+@media (max-width: 900px) {
+  .projects-wrapper {
+    max-width: 100%;
+    padding: 0 12px;
+  }
+
+  .project-card,
+  .projects-columns {
+    font-size: 15px;
+  }
+}
+
+
+@media (max-width: 720px) {
+  
+  .projects-wrapper {
+    margin: 24px auto;
+  }
+
+  /* HIDE the 'Name' label on mobile */
+  .project-card>div:first-child::before {
+    content: "";
+    display: none;
+  }
+
+  .project-link {
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  /* Make project name align left naturally */
+  .project-card>div:first-child {
+    justify-content: flex-start;
+  }
+
+
+  /* header: title over Add New */
+  .page-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  /* hide column headings on mobile */
+  .projects-columns {
+    display: none;
+    position: static;
+    border: 0;
+    padding: 0;
+    margin-top: 8px;
+  }
+
+  /* let list grow – no internal scroll */
+  .projects-list {
+    max-height: none;
+    padding: 16px 0 24px;
+    row-gap: 16px;
+    margin-top: 28px;
+  }
+
+  /* each project becomes a stacked card */
+  .project-card {
+    grid-template-columns: 1fr;
+    padding: 16px 14px;
+    margin: 8px 0;
+  }
+
+  /* each cell: "Label : Value" */
+  .project-card>div {
+    justify-content: space-between;
+    align-items: center;
+    min-height: 0;
+  }
+
+  .project-card>div::before {
+    content: attr(data-label);
+    font-weight: 600;
+    margin-right: 12px;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  .project-card>div:first-child {
+    white-space: normal;
+  }
+
+  /* status row: status + dot + actions */
+  .project-card-status {
+    justify-content: flex-start;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .status-dot {
+    width: 32px;
+    height: 32px;
+  }
+
+  .row-actions {
+    margin-left: 0;
+    width: 100%;
+    margin-left: 0;
+    justify-content: flex-start;
+    gap: 0px;
+  }
+
+  /* forms: don’t show labels from data-label */
+  .project-card--editing>div::before {
+    content: "";
+  }
+
+  .project-card.project-card--editing {
+    grid-template-columns: 1fr;
+    padding: 16px 14px;
+    margin: 10px 0;
+  }
 }

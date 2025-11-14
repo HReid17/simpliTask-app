@@ -5,8 +5,6 @@ import "./dashboardProjectCard.css"
 
 export default function DashboardProjectsCard() {
 
-    const max = 5;
-
     const statusClass = (s = "") => {
         const v = s.toLowerCase();
         if (v.includes("complete")) return "bg-green-100 text-green-700";
@@ -29,7 +27,7 @@ export default function DashboardProjectsCard() {
         }, {});
     }, [tasks]);
 
-    const recentProjects = useMemo(() => projects.slice(0, max), [projects]);
+    const recentProjects = projects;
 
     return (
         <div className="projects-card">

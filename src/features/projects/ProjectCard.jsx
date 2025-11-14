@@ -87,7 +87,7 @@ export default function ProjectCard() {
                 </button>
                 <h1 className="name">{project.name}</h1>
                 <div className="meta">
-                    <span>
+                    <span className="due">
                         Due:{" "}
                         {project.due
                             ? new Date(project.due).toLocaleDateString("en-GB")

@@ -26,12 +26,12 @@ export default function CalendarPage() {
     return "#2563eb" // Todo (blue)
   }
 
-  // Every task becomes a FullCalendar event on its due date and is memorised using useMemo
+  // Every task becomes an event on its due date and is memorised using useMemo
   const events = useMemo(
     () =>
       tasks.map((t) => {
         const bg = colorFromProgress(t.progress);
-        return{
+        return {
           id: String(t.id),
           title: t.name,
           start: new Date(t.date),
@@ -39,7 +39,7 @@ export default function CalendarPage() {
           backgroundColor: bg,
           borderColor: bg,
           extendedProps: {
-            task: t,                 // keep entire task here
+            task: t,                 // keep entire task 
             status: statusFromProgress(t.progress),
           },
         };
@@ -89,30 +89,32 @@ export default function CalendarPage() {
   };
 
   return (
-    <div className="calendar-card">
-      <FullCalendar
-        plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-        initialView="dayGridMonth"
-        headerToolbar={{
-          start: "today prev,next",
-          center: "title",
-          end: "dayGridMonth,timeGridWeek,timeGridDay",
-        }}
-        height="80vh"
+    <div className="calendar-card-wrapper">
+      <div className="calendar">
+        <FullCalendar
+          plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+          initialView="dayGridMonth"
+          headerToolbar={{
+            start: "today prev,next",
+            center: "title",
+            end: "dayGridMonth,timeGridWeek,timeGridDay",
+          }}
+          height="100%"
 
-        // Event date from Tasks
-        events={events}
+          // Event date from Tasks
+          events={events}
 
-        // Handles our clicks on event blocks
-        eventClick={onEventClick}
+          // Handles our clicks on event blocks
+          eventClick={onEventClick}
 
-        // Custom rendering logic for each event (title + details)
-        eventContent={renderEventContent}
+          // Custom rendering logic for each event (title + details)
+          eventContent={renderEventContent}
 
-        eventDisplay="block"       // Block so it can grow
-        dayMaxEventRows={2}      // prevent FC from collapsing extra content
+          eventDisplay="block"       // Block so it can grow
+          dayMaxEventRows={2}      // prevent FC from collapsing extra content
 
-      />
+        />
+      </div>
     </div>
   );
 }

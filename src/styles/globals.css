@@ -9,7 +9,6 @@ html,
 body,
 #root {
   height: 100%;
-  overflow-y: hidden;
 }
 
 /* Layout wrapper */
@@ -31,4 +30,30 @@ body,
   padding: 24px;
   overflow: auto;
   background-color: #F6F6F6;
+}
+
+
+/*  Responsive Layout  */
+
+/* Mobile / Tablet */
+@media (max-width: 900px) {
+  .main-layout {
+    flex-direction: column;  /* sidebar above main */
+  }
+
+  /* Hide sidebar entirely on small screens */
+  .sidebar {
+    display: none;
+  }
+
+  /* Main content full width */
+  .main {
+    width: 100%;
+    overflow-y: auto;
+  }
+
+  /* Reduce padding on mobile */
+  .content {
+    padding: 20px;
+  }
 }

@@ -1,6 +1,6 @@
-/* ===== Scrollable Tasks List ===== */
+/* Scrollable Tasks List */
 
-.tasks-card .tasks-list {   /* ~3 items tall — adjust if needed */
+.tasks-card .tasks-list {   /* 3 items tall */
   max-height: 9rem;
   overflow-y: auto;        /* enables scrolling if more tasks exist */
   padding-right: 0.5rem;   /* prevents text being hidden under scrollbar */
@@ -19,7 +19,6 @@
   margin-left: auto;
 }
 
-/* Tweak the inner task styling for readability */
 .tasks-card .tasks-list li {
   padding: 0.75rem 0;
   border-bottom: 1px solid #e5e7eb;  /* light divider line */
@@ -37,12 +36,12 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: .5rem; /* optional */
+  gap: 0.5rem;
   width: 90%;
 }
 
 .details .name {
-  flex: 1;                 /* takes the remaining space */
+  flex: 1;                 /* takes up the remaining space */
   font-weight: 500;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -53,6 +52,7 @@
   width: 140px;            /* keeps dates aligned */
   text-align: right;
   color: #4b5563;
+  margin-right: 6rem;
 }
 
 .details .progress {
@@ -62,7 +62,7 @@
 }
 
 
-/* ===== Optional: Custom scrollbar (modern look) ===== */
+/* Custom scrollbar */
 
 .tasks-card .tasks-list::-webkit-scrollbar {
   width: 6px;
@@ -77,3 +77,46 @@
   background-color: #9ca3af; /* gray-400 */
 }
 
+
+@media (max-width: 480px) {
+  .tasks-card .tasks-list {
+    max-height: 11rem;          /* a bit taller since items wrap */
+  }
+
+  .tasks-card .tasks-list li {
+    padding: 0.5rem 0;
+  }
+
+  .details {
+    flex-direction: column;     /* stack text instead of row */
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 100%;
+    gap: 0.25rem;
+    font-size: 14px;
+  }
+
+  .details .name {
+    white-space: normal;        /* allow wrapping */
+    font-weight: 600;
+  }
+
+  .details .date {
+    margin-right:2rem ;
+  }
+
+  .details .date,
+  .details .progress {
+    width: auto;                /* no fixed widths */
+    text-align: left;
+    font-size: 11px;
+  }
+
+    .details-bottom {
+    display: flex;
+    gap: 2.5rem;
+    font-size: 11px;
+    color: #4b5563;
+  }
+
+}

@@ -204,168 +204,182 @@ export default function TasksPage() {
                 <button type="submit">Save Task</button>
             </form>)}
 
-            <div className="task-table">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Task Name <button className="sortIcon-btn" onClick={handleSortByName}><img src={sortIcon} alt="sort-icon" className="sortIcon" /></button></th>
-                            <th>Task Date <button className="sortingIcon-btn" onClick={handleSortByDate}><img src={sortingIcon} alt="sorting-icon" className="sortingIcon" /></button></th>
-                            <th>Project <button className="sortIcon-btn" onClick={handleByProject}><img src={sortIcon} alt="sort-icon" className="sortIcon" /></button></th>
-                            <th>Progress <button className="sortingIcon-btn" onClick={handleSortByProgress}><img src={sortingIcon} alt="sorting-icon" className="sortingIcon" /></button></th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {displayedTasks.length === 0 ? (
+            <div className="task-table-wrapper">
+                <div className="task-table">
+                    <table>
+                        <thead>
                             <tr>
-                                <td colSpan="5" style={{ textAlign: "center", padding: "1rem" }}>
-                                    No tasks yet - add some above !
-                                </td>
+                                <th>Task Name <button className="sortIcon-btn" onClick={handleSortByName}><img src={sortIcon} alt="sort-icon" className="sortIcon" /></button></th>
+                                <th>Task Date <button className="sortingIcon-btn" onClick={handleSortByDate}><img src={sortingIcon} alt="sorting-icon" className="sortingIcon" /></button></th>
+                                <th>Project <button className="sortIcon-btn" onClick={handleByProject}><img src={sortIcon} alt="sort-icon" className="sortIcon" /></button></th>
+                                <th>Progress <button className="sortingIcon-btn" onClick={handleSortByProgress}><img src={sortingIcon} alt="sorting-icon" className="sortingIcon" /></button></th>
+                                <th>Actions</th>
                             </tr>
-                        ) : (
-                            displayedTasks.map((task) => (
-                                <tr key={task.id} data-task-id={task.id}>
-                                    {/* NAME */}
-                                    <td>
-                                        {isEditing?.id === task.id && isEditing.field === "name" ? (
-                                            <input
-                                                type="text"
-                                                value={editValue}
-                                                onChange={(e) => setEditValue(e.target.value)}
-                                                onBlur={() => handleSaveEdit(task.id)}
-                                                onKeyDown={(e) => handleKeyDown(e, task.id)}
-                                                autoFocus
-                                            />
-                                        ) : (
-                                            <>
-                                                {task.name}
-                                                {activeEditRow === task.id && (
-                                                    <button
-                                                        className="edit-btn"
-                                                        type="button"
-                                                        onClick={() => handleEdit(task.id, "name", task.name)}
-                                                    >
-                                                        <img src={pencil} alt="edit" />
-                                                    </button>
-                                                )}
-                                            </>
-                                        )}
+                        </thead>
+                        <tbody>
+                            {displayedTasks.length === 0 ? (
+                                <tr>
+                                    <td colSpan="5" style={{ textAlign: "center", padding: "1rem" }}>
+                                        No tasks yet - add some above !
                                     </td>
-
-                                    {/* DATE */}
-                                    <td>
-                                        {isEditing?.id === task.id && isEditing.field === "date" ? (
-                                            <input
-                                                type="date"
-                                                value={editValue || ""}
-                                                onChange={(e) => setEditValue(e.target.value)}
-                                                onBlur={() => handleSaveEdit(task.id)}
-                                                onKeyDown={(e) => handleKeyDown(e, task.id)}
-                                                autoFocus
-                                            />
-                                        ) : (
-                                            <>
-                                                {task.date || "-"}
-                                                {activeEditRow === task.id && (
-                                                    <button
-                                                        className="edit-btn"
-                                                        type="button"
-                                                        onClick={() => handleEdit(task.id, "date", task.date || "")}
-                                                    >
-                                                        <img src={pencil} alt="edit" />
-                                                    </button>
-                                                )}
-                                            </>
-                                        )}
-                                    </td>
-
-
-                                    {/* PROJECT */}
-                                    <td>
-                                        {isEditing?.id === task.id && isEditing.field === "project" ? (
-                                            <select
-                                                value={editValue}
-                                                onChange={(e) => setEditValue(e.target.value)}
-                                                onBlur={() => handleSaveEdit(task.id)}
-                                                autoFocus
-                                            >
-                                                <option value="">Unassigned</option>
-                                                {projects.map(p => (
-                                                    <option key={p.id} value={p.id}>{p.name}</option>
-                                                ))}
-                                            </select>
-                                        ) : (
-                                            <>
-                                                {projects.find(p => p.id === task.project)?.name || "-"}
-                                                {activeEditRow === task.id && (
-                                                    <button
-                                                        className="edit-btn"
-                                                        type="button"
-                                                        onClick={() => handleEdit(task.id, "project", task.project || "")}
-                                                    >
-                                                        <img src={pencil} alt="edit" />
-                                                    </button>
-                                                )}
-                                            </>
-                                        )}
-                                    </td>
-
-
-
-                                    {/* PROGRESS */}
-                                    <td>
-                                        {isEditing?.id === task.id && isEditing.field === "progress" ? (
-                                            <input
-                                                type="number"
-                                                min={0}
-                                                max={100}
-                                                value={editValue}
-                                                onChange={(e) => setEditValue(e.target.value)}
-                                                onBlur={() => handleSaveEdit(task.id)}
-                                                onKeyDown={(e) => handleKeyDown(e, task.id)}
-                                                autoFocus
-                                            />
-                                        ) : (
-                                            <>
-                                                {task.progress}%
-                                                {activeEditRow === task.id && (
-                                                    <button
-                                                        className="edit-btn"
-                                                        type="button"
-                                                        onClick={() => handleEdit(task.id, "progress", String(task.progress))}
-                                                    >
-                                                        <img src={pencil} alt="edit" />
-                                                    </button>
-                                                )}
-                                            </>
-                                        )}
-                                    </td>
-
-
-                                    {/* ACTIONS */}
-                                    <td className="actions">
-                                        {activeEditRow === task.id ? (
-                                            <button className="link-btn" type="button" onClick={() => setActiveEditRow(null)}>
-                                                Close
-                                            </button>
-                                        ) : (
-                                            <>
-                                                <button className="link-btn" type="button" onClick={() => setActiveEditRow(task.id)}>
-                                                    Edit
-                                                </button>
-                                                <button className="delete-btn" type="button" onClick={() => dispatch(removeTask(task.id))}>
-                                                    Delete
-                                                </button>
-                                            </>
-                                        )}
-                                    </td>
-
                                 </tr>
-                            ))
-                        )}
-                    </tbody>
+                            ) : (
+                                displayedTasks.map((task) => (
+                                    <tr key={task.id} data-task-id={task.id}>
+                                        {/* NAME */}
+                                        <td data-label="Task Name">
+                                            {isEditing?.id === task.id && isEditing.field === "name" ? (
+                                                <input
+                                                    type="text"
+                                                    value={editValue}
+                                                    onChange={(e) => setEditValue(e.target.value)}
+                                                    onBlur={() => handleSaveEdit(task.id)}
+                                                    onKeyDown={(e) => handleKeyDown(e, task.id)}
+                                                    autoFocus
+                                                />
+                                            ) : (
+                                                <>
+                                                    {task.name}
+                                                    {activeEditRow === task.id && (
+                                                        <button
+                                                            className="edit-btn"
+                                                            type="button"
+                                                            onClick={() => handleEdit(task.id, "name", task.name)}
+                                                        >
+                                                            <img src={pencil} alt="edit" />
+                                                        </button>
+                                                    )}
+                                                </>
+                                            )}
+                                        </td>
 
-                </table>
+                                        {/* DATE */}
+                                        <td data-label="Task Date">
+                                            {isEditing?.id === task.id && isEditing.field === "date" ? (
+                                                <input
+                                                    type="date"
+                                                    value={editValue || ""}
+                                                    onChange={(e) => setEditValue(e.target.value)}
+                                                    onBlur={() => handleSaveEdit(task.id)}
+                                                    onKeyDown={(e) => handleKeyDown(e, task.id)}
+                                                    autoFocus
+                                                />
+                                            ) : (
+                                                <>
+                                                    {task.date || "-"}
+                                                    {activeEditRow === task.id && (
+                                                        <button
+                                                            className="edit-btn"
+                                                            type="button"
+                                                            onClick={() => handleEdit(task.id, "date", task.date || "")}
+                                                        >
+                                                            <img src={pencil} alt="edit" />
+                                                        </button>
+                                                    )}
+                                                </>
+                                            )}
+                                        </td>
+
+
+                                        {/* PROJECT */}
+                                        <td data-label="Project">
+                                            {isEditing?.id === task.id && isEditing.field === "project" ? (
+                                                <select
+                                                    value={editValue}
+                                                    onChange={(e) => setEditValue(e.target.value)}
+                                                    onBlur={() => handleSaveEdit(task.id)}
+                                                    autoFocus
+                                                >
+                                                    <option value="">Unassigned</option>
+                                                    {projects.map(p => (
+                                                        <option key={p.id} value={p.id}>{p.name}</option>
+                                                    ))}
+                                                </select>
+                                            ) : (
+                                                <>
+                                                    {projects.find(p => p.id === task.project)?.name || "-"}
+                                                    {activeEditRow === task.id && (
+                                                        <button
+                                                            className="edit-btn"
+                                                            type="button"
+                                                            onClick={() => handleEdit(task.id, "project", task.project || "")}
+                                                        >
+                                                            <img src={pencil} alt="edit" />
+                                                        </button>
+                                                    )}
+                                                </>
+                                            )}
+                                        </td>
+
+
+
+                                        {/* PROGRESS */}
+                                        <td data-label="Progress">
+                                            {isEditing?.id === task.id && isEditing.field === "progress" ? (
+                                                <input
+                                                    type="number"
+                                                    min={0}
+                                                    max={100}
+                                                    value={editValue}
+                                                    onChange={(e) => setEditValue(e.target.value)}
+                                                    onBlur={() => handleSaveEdit(task.id)}
+                                                    onKeyDown={(e) => handleKeyDown(e, task.id)}
+                                                    autoFocus
+                                                />
+                                            ) : (
+                                                <>
+                                                    {task.progress}%
+                                                    {activeEditRow === task.id && (
+                                                        <button
+                                                            className="edit-btn"
+                                                            type="button"
+                                                            onClick={() => handleEdit(task.id, "progress", String(task.progress))}
+                                                        >
+                                                            <img src={pencil} alt="edit" />
+                                                        </button>
+                                                    )}
+                                                </>
+                                            )}
+                                        </td>
+
+
+                                        {/* ACTIONS */}
+                                        <td className="actions" data-label="Actions">
+                                            {activeEditRow === task.id ? (
+                                                <button
+                                                    className="link-btn"
+                                                    type="button"
+                                                    onClick={() => setActiveEditRow(null)}
+                                                >
+                                                    Close
+                                                </button>
+                                            ) : (
+                                                <div className="actions-buttons">
+                                                    <button
+                                                        className="link-btn"
+                                                        type="button"
+                                                        onClick={() => setActiveEditRow(task.id)}
+                                                    >
+                                                        Edit
+                                                    </button>
+                                                    <button
+                                                        className="delete-btn"
+                                                        type="button"
+                                                        onClick={() => dispatch(removeTask(task.id))}
+                                                    >
+                                                        Delete
+                                                    </button>
+                                                </div>
+                                            )}
+                                        </td>
+
+                                    </tr>
+                                ))
+                            )}
+                        </tbody>
+
+                    </table>
+                </div>
             </div>
         </div>
     )

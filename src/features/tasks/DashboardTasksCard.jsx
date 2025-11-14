@@ -5,7 +5,7 @@ import "./dashboardTasksCard.css"
 
 export default function DashboardTasksCard() {
 
-    const max = 5;
+    const max = 20;
 
     const tasks = useSelector((s) => s.tasks.tasks)
     const nav = useNavigate()
@@ -31,7 +31,7 @@ export default function DashboardTasksCard() {
     return (
         <div className="tasks-card">
             <div className="top-line">
-                <h2>Upcoming Task's</h2>
+                <h2>Upcoming Task ({tasks.length})</h2>
                 <button className="view-btn" onClick={() => nav("/tasks")}>View All</button>
             </div>
 
@@ -44,8 +44,10 @@ export default function DashboardTasksCard() {
                             <li key={t.id} onClick={handleTaskClick}>
                                 <div className="details">
                                     <span className="name">{t.name}</span>
-                                    <span className="date">Due: {new Date(t.date).toLocaleDateString()}</span>
-                                    <span className="progress">{statusFromProgress(t.progress)}</span>
+                                    <div className="bottom" /* for mobile view (on one line for better readability)*/>
+                                        <span className="date">Due: {new Date(t.date).toLocaleDateString()}</span>
+                                        <span className="progress">Status: {statusFromProgress(t.progress)}</span>
+                                    </div>
                                 </div>
                             </li>
                         ))}
@@ -55,5 +57,4 @@ export default function DashboardTasksCard() {
             )}
         </div>
     )
-
 }
